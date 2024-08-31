@@ -1,32 +1,39 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
 using namespace std;
 
-void solve(){
-    long long int n, k;
-    cin >> n >> k;
-    string arr[k];
-    for(int i = 0;i < k;i++){
-        cin >> arr[i];
-    }
-    long long int Y = 0, N = 0;
-    long int no_of_members = n;
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, k;
+        cin >> n >> k;
+        vector<string> members(n);
+        for (int i = 0; i < n; ++i) {
+            cin >> members[i];
+        }
 
-    for(int i = 0; i < k; i++){
-        for(int j = 0; j < i;j++){
-            if(arr[i] == "+"){
-                Y++;
+
+        string president = members[0];
+
+        int max_members = 1; 
+
+    
+        for (int i = 1; i < n; ++i) {
+            bool can_stay = true;
+            for (int j = 0; j < k; ++j) {
+                if (members[i][j] != president[j]) {
+                    can_stay = false;
+                    break;
+                }
             }
-            else{
-                N++;
+            if (can_stay) {
+                max_members++;
             }
         }
-    }
 
-}
-
-int main(){
-    int t; cin >> t;
-    while(t--){
-        solve();
+        cout << max_members << endl;
     }
+    return 0;
 }
