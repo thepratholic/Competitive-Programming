@@ -7,6 +7,7 @@ class Solution:
         if n < 3: return 0
         l, r = 0, 2
 
+
         while r < n:
             if (nums[r] + nums[l]) == nums[r-1] / 2:
                 count += 1
