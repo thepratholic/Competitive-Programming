@@ -6,6 +6,7 @@ class Solution:
         if len(nums) == len(set(nums)):
             return 0
 
+
         operations = 0
         while nums:
             nums = nums[3:]
