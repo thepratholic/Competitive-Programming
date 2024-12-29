@@ -1,1 +1,0 @@
-Hello Everyone, this is the input file or we can say it's a demo file for competitive programming.
