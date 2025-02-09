@@ -29,4 +29,4 @@ class Solution:
         for i in range(n):
             sort_diagonal(i, 0, ascending=False)
 
-        return grid©leetcode
+        return grid
