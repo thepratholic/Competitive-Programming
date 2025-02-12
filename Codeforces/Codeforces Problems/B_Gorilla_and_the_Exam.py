@@ -1,20 +1,14 @@
 from collections import Counter
-
 def solve():
-    n, k = map(int, input().split())
-    a = list(map(int, input().split()))
-
-    freq = sorted(Counter(a).values())
-    ans = len(freq)
-
-    for count in freq:
-        if k >= count:
-            k -= count
-            ans -= 1
-        else:
-            break
-
-    print(max(1, ans))
+    n,k=map(int,input().split())
+    freq=Counter(input().split())
+    m=len(freq)
+    for el in sorted(freq.values()) :
+       if k<el:
+           break
+       k-=el
+       m-=1
+    print(max(1,m))
 
 if __name__ == "__main__":
     for _ in range(int(input())):
