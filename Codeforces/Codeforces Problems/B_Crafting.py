@@ -5,23 +5,14 @@ def solve():
     b = list(map(int, input().split()))
 
     for i in range(n):
-        if a[i] < b[i]:
-            for j in range(n):
-                if j == i:
-                    continue
-                else:
-                    if a[j] >= 0:
-                        a[i] += 1
-                        a[j] -= 1
+        a[i] = a[i] - b[i]
 
+    a.sort()
 
-    for i in range(n):
-        if a[i] >= b[i]:
-            pass
-        else:
-            print("NO")
-            return
-    print("YES")
+    if abs(a[0]) <= a[1] and a[1] >= 0:
+        print("YES")
+    else:
+        print("NO")
 
 if __name__ == "__main__":
     for _ in range(int(input())):
