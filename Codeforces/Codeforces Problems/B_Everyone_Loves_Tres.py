@@ -16,7 +16,7 @@ def solve():
         ans += "66"
         print(ans)
         return
-    
+
     if n % 2 == 1:
         for i in range(n - 4):
             ans += "3"
