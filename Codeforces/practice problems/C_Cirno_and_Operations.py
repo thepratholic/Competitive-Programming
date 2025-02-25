@@ -9,7 +9,19 @@ def debug(*args):
     print("DEBUG:", *args, file=sys.stderr)
 
 def solve():
-    pass
+    n = int(input())
+    a = list(map(int, input().split()))
+
+    if n == 1:
+        print(a[0])
+        return
+    ans = sum(a)
+    while n > 1:
+        n -= 1
+        a = a[::-1]
+        a = [a[i+1] - a[i] for i in range(n)]
+        ans = max(ans, abs(sum(a)))
+    print(ans)
 
 def main():
     t = 1
