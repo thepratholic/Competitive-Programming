@@ -12,8 +12,7 @@ def solve(N):
             return seconds
 
         queue.pop(0)
-        if len(queue) > 1:
-            queue.pop(1)
+        queue.pop(1)
 
 T = int(input())
 
