@@ -2,32 +2,38 @@
 using namespace std;
 
 void solve() {
-    int n;
-    cin >> n;
+    string s;
+    cin >> s;
+    int n = s.size();
+    int idx = -1;
 
-    vector<int> v(n);
-    for(int i = 0; i < n;i++) {
-        cin >> v[i];
+    for (int i = 0; i < n; i++) {
+        if (s[i] == '0') {
+            idx = i;
+            break;
+        }
     }
 
-    if( n % 2 == 0) {
-        cout << 2 << endl;
-        cout << 1 << " " << n << endl;
-        cout << 1 << " " << n << endl;
+    if (idx == -1) idx = n-1;
+
+    int k = idx - 1;
+    for(int j = idx; j < n && k >= 0; j++, k--) {
+        if (s[j] == '1') {
+            break;
+        }
     }
 
-    else{
-        cout << 4 << endl;
-        cout << 1 << " " << n << endl;
-        cout << 2 << " " << n << endl;
-        cout << 1 << " " << 2 << endl;
-        cout << 1 << " " << 2 << endl;
-    }
+    k ++;
+
+    cout << 1 << " " << n << " " << k + 1 << " " << k + n - idx << endl;
+
 }
+
 
 int main() {
     int t;
     cin >> t;
+
     while(t--) {
         solve();
     }
