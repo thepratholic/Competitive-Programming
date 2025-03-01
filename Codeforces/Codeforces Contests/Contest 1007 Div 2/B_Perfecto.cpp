@@ -11,18 +11,22 @@ using namespace std;
 // Debugging Macros
 #define debug(x) cerr << #x << " = " << (x) << endl;
 
-void solve() {
-    long long n;
-    cin >> n;
 
+void solve()
+{
     
 }
 
-int32_t main() {
-    fast_io;
-    int t = 1;
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    long long t;
     cin >> t;
-    while (t--) {
+    while (t--)
+    {
         solve();
     }
     return 0;
