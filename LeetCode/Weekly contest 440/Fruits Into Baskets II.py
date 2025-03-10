@@ -4,22 +4,20 @@ from typing import List
 class Solution:
     def numOfUnplacedFruits(self, fruits: List[int], baskets: List[int]) -> int:
         n = len(fruits)
-        unplaced = 0
         
-        
-        available_baskets = [True] * n 
-        
+        cnt = 0
+
         for i in range(n):
-            fruit_quantity = fruits[i]
-            placed = False
-            
+            placed =  False
+
             for j in range(n):
-                if available_baskets[j] and baskets[j] >= fruit_quantity:
-                    available_baskets[j] = False 
+                if baskets[j] >= fruits[i]:
+                    baskets[j] = 0
                     placed = True
                     break
-                    
-            if not placed:
-                unplaced += 1
-                
-        return unplaced
+
+            if placed is False:
+                cnt += 1
+
+
+        return cnt
