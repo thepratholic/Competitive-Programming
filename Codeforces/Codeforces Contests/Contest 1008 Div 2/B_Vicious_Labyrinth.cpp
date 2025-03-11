@@ -27,24 +27,32 @@ void solve()
 {
     ll n, k;
     cin >> n >> k;
-    
-    vector<ll> a(n + 1);
-    f(i, n) a[i] = i + 1;
-    a[n - 1] = 0;
 
-    vector<ll> res(n);
-    f(i, n)
-    {
-        ll p = i, step = k % n;
-        while (step--)
-            p = a[p];
-        res[i] = p + 1;
+    vector<ll> a(n);
+    
+    if(n == 2) {
+        cout << "2 1" << endl;
+        return;
     }
 
-    f(i, n) cout << res[i] << " ";
-    cout << nline;
-}
+    if(k % 2 == 1) {
+        for(ll i = 0; i < n; i++) {
+            a[i] = n;
+        }
+        a[n - 1] = n - 1;
+    }
 
+
+    else {
+        for(ll i = 0; i < n; i++) {
+            a[i] = n - 1;
+        }
+        a[n - 2] = n;
+    }
+
+    for(auto &i : a) cout << i << " ";
+    cout << endl;
+}
 
 int main()
 {
