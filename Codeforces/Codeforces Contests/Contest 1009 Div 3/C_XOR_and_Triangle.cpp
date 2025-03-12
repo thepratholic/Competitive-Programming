@@ -25,19 +25,31 @@ using namespace std;
 
 void solve()
 {
-    ll x;
+    int x;
     cin >> x;
-
-    for (ll y = x - 1; y >= 1; --y) {
-        ll z = x ^ y;
-        if (y + z > x && x + z > y && x + y > z) {
-            cout << y << "\n";
-            return;
+    if (__builtin_popcountll(x) == 1) {
+        cout << "-1\n";
+        return;
+    }
+    int y = 0;
+    int f1 = 0, f0 = 0;
+    for (int i = 0; i <= 30; i++) {
+        if (x & (1 << i)) {
+            if (f1 == 0) {
+                y |= 1 << i;
+                f1 = 1;
+            }
+        } else {
+            if (f0 == 0) {
+                y |= 1 << i;
+                f0 = 1;
+            }
         }
     }
-
-
-    cout << "-1" << nl;
+    if (y < x) {
+        cout << y << '\n';
+    } else
+        cout << "-1\n";
     
 }
 
