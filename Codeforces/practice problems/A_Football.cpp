@@ -25,17 +25,26 @@ using namespace std;
 
 void solve()
 {
-    string s;
-    cin >> s;
+    ll n;
+    cin >> n;
 
-    if(s.size() < 7) {
-        cout << "NO" << endl;
-        return;
+    unordered_map<string, ll> mpp;
+    for(int i = 0; i < n; i++) {
+        string s;
+        cin >> s;
+        mpp[s] ++;
     }
 
+    ll maxi = -INF;
+    string ans = "";
+    for(auto &p : mpp) {
+        if(p.second > maxi) {
+            ans = p.first;
+            maxi = p.second;
+        }
+    }
 
-    if(s.find("1111111") != -1 || s.find("0000000") != -1) yes;
-    else no;
+    cout << ans << endl;
 }
 
 int main()
