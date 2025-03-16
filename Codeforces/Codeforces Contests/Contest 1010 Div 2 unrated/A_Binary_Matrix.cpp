@@ -23,7 +23,7 @@ void solve() {
     int row_count = accumulate(row_xor.begin(), row_xor.end(), 0);
     int col_count = accumulate(col_xor.begin(), col_xor.end(), 0);
 
-    cout << max(row_count, col_count) << '\n';
+    cout << max(row_count, col_count) << endl;
 }
 
 int main() {
