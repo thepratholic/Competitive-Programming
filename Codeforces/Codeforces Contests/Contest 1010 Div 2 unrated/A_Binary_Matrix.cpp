@@ -6,10 +6,10 @@ using namespace std;
 #define f(i, n) for (ll i = 0; i < n; i++)
 
 void solve() {
-    int n, m;
+    ll n, m;
     cin >> n >> m;
 
-    vector<int> row_xor(n, 0), col_xor(m, 0);
+    vector<ll> row_xor(n, 0), col_xor(m, 0);
     char x;
 
     f(i, n) {
@@ -20,8 +20,8 @@ void solve() {
         }
     }
 
-    int row_count = accumulate(row_xor.begin(), row_xor.end(), 0);
-    int col_count = accumulate(col_xor.begin(), col_xor.end(), 0);
+    ll row_count = accumulate(row_xor.begin(), row_xor.end(), 0);
+    ll col_count = accumulate(col_xor.begin(), col_xor.end(), 0);
 
     cout << max(row_count, col_count) << endl;
 }
