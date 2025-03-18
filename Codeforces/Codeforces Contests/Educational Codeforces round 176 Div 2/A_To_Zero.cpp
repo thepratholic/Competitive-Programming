@@ -28,13 +28,19 @@ void solve()
     ll n, k;
     cin >> n >> k;
 
-    if (n % k == 0) {
-        cout << n / k << endl;
-    } 
-    else {
-        cout << (n / k) + 1 << endl;
+    ll ans = 0;
+    if(n % 2 == 1 && k % 2 == 1) {
+        n -= k;
+        ans++;
+        k--;
     }
-    
+
+    if(n % 2 == 0 && k % 2 == 1) {
+        k--;
+    }
+
+    ans += (n + k - 1) / k;
+    cout << ans << endl;
 }
 
 int main()
