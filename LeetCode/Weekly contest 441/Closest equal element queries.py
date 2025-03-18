@@ -15,7 +15,7 @@ class Solution:
             it = st.bisect_left((nums[q], q))
 
             prev_it = st[it - 1][1] if it > 0 else float('inf')
-            next_it = st[it + 1][1] if it < len(st) else float('inf')
+            next_it = st[it + 1][1] if it + 1 < len(st) else float('inf')
 
             ans.append(min(n, q - prev_it, next_it - q))
 
