@@ -1,10 +1,8 @@
-def f(i, n):
-    if i == n + 1:
-        return
+def f(a, n):
+    if n == 1:
+        return a
     
-    print(i)
+    ans = f(a, n - 1)
+    return a * ans
 
-    f(i + 1, n)
-    return
-
-f(1, 5)
+print(f(2, 4))
