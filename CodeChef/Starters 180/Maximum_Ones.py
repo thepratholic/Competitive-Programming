@@ -1,18 +1,25 @@
-def solve():
+# cook your dish here
+# Solution for Maximum Ones problem
+
+def solve_max_ones(s, k):
+    n = len(s)
+    s = list(map(int, s))
+    
+    result = s.copy()
+    operations_left = k
+    
+    for i in range(n-2, -1, -1):
+        if operations_left > 0 and result[i] == 0 and result[i+1] == 1:
+            result[i] = 1 
+            operations_left -= 1
+    
+    return sum(result) 
+
+t = int(input())
+
+for _ in range(t):
     n, k = map(int, input().split())
-
-    s = list(input().strip())
-
-    while True:
-        if k == 0:
-            break
-        for i in range(n - 1):
-            if s[i] == '0' and s[i + 1] == '1':
-                s[i] = '1'
-        k -= 1
-
-    print(s.count('1'))
-
-if __name__ == "__main__":
-    for _ in range(int(input())):
-        solve()
+    
+    s = input().strip()
+    
+    print(solve_max_ones(s, k))
