@@ -1,55 +1,73 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
-long long gcd(long long a, long long b) {
-    while(b) {
-        a %= b;
-        swap(a, b);
+
+#define ll long long
+#define f(i, n) for (ll i = 0; i < n; i++)
+#define ia(a, n) \
+    ll a[n];     \
+    f(i, n) cin >> a[i]
+#define iv(v, n) \
+    vector<ll> v(n); \
+    f(i, n) cin >> v[i]
+#define MOD (1000000007)
+#define INF 1000000000000000000LL // Infinity for ll
+#define mp make_pair
+#define nline '\n'
+#define yes cout << "YES\n"
+#define no cout << "NO\n"
+
+// Updated solve function using long long instead of int.
+void solve()
+{
+    ll n;
+    cin >> n;
+
+    vector<ll> v(n);
+    for(ll &x : v) 
+        cin >> x;
+
+    // Find the position of the smallest element.
+    ll p = min_element(v.begin(), v.end()) - v.begin();
+    ll g = 0;
+
+    // Calculate the gcd for all elements that are multiples of v[p], skipping the chosen occurrence.
+    for(ll i = 0; i < n; i++) {
+        if(i != p && v[i] % v[p] == 0) {
+            g = __gcd(g, v[i]);
+        }
     }
-    return a;
+
+    // Check if the gcd equals the smallest element.
+    if(g == v[p]) {
+        cout << "Yes" << endl;
+    }
+    else {
+        cout << "No" << endl;
+    }
 }
- 
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    
-    int t;
+
+int main()
+{
+#ifdef thepratholic
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    clock_t T = clock();
+#endif
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ll t = 1;
     cin >> t;
-    while(t--){
-        int n;
-        cin >> n;
-        vector<long long> a(n);
-        for(auto &x : a) cin >> x;
-        
-        long long m = *min_element(a.begin(), a.end());
-        int count_m = 0;
-        for(auto &x : a) {
-            if(x == m) count_m++;
-        }
- 
-        if(count_m >= 2) {
-            cout << "Yes\n";
-            continue;
-        }
- 
-        long long g = 0;
-        bool found = false;
-        for(auto &x : a) {
-            if(x != m && x % m == 0) {
-                if(!found) {
-                    g = x;
-                    found = true;
-                } else {
-                    g = gcd(g, x);
-                }
-            }
-        }
- 
-        if(found && g == m)
-            cout << "Yes" << endl;
-        else
-            cout << "No" << endl;
+
+    while (t--)
+    {
+        solve();
     }
-    
+
+#ifdef thepratholic
+    cout << "\nTime taken: " << ((float)(clock() - T)) / CLOCKS_PER_SEC << " seconds";
+#endif
     return 0;
 }
