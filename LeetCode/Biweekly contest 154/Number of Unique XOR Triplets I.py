@@ -7,5 +7,4 @@ class Solution:
         n = len(nums)
         if n < 3:
             return n
-        L = math.floor(math.log2(n)) + 1
-        return 1 << L  
+        return 1 << n.bit_length()
