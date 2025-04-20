@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def maximumPossibleSize(self, nums: List[int]) -> int:
         stack = []
