@@ -1,110 +1,77 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
+#define ll long long
+#define f(i, n) for (ll i = 0; i < n; i++)
+#define ia(a, n) \
+    ll a[n];     \
+    f(i, n) cin >> a[i]
+#define iv(v, n) \
+    vector<ll> v(n); \
+    f(i, n) cin >> v[i]
+#define MOD (1000000007)
+#define INF 1000000000000000000LL // Infinity for ll
+#define mp make_pair
+#define nline '\n'
+#define yes cout << "YES\n"
+#define no cout << "NO\n"
 
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+// read question properly
+// don't forget newlines!!!!!!
+// take care about cin >> t;
+// comment the optimization before debugging
+// ALWAYS USE FIXED << SETPRECISION WHILE OUTPUTTING FLOATS
 
-    int T;
-    cin >> T;
-    while(T--){
-        int n;
-        string s;
-        cin >> n >> s;
+void solve()
+{
+    ll n;
+    string s;
+    cin >> n;
+    cin >> s;
 
-        vector<int> L;
-        vector<char> t;
-        for(int i = 0; i < n-1; ){
-            char c = s[i];
-            int j = i;
-            while(j < n-1 && s[j] == c) j++;
-            t.push_back(c);
-            L.push_back(j - i);
-            i = j;
+    ll l = 0, r = 0;
+    vector<ll> v(n);
+    v[0] = 0;
+    for(ll i = 0; i < n - 1; i++) {
+        if(s[i] == '<') {
+            v[i + 1] = --l;
         }
-        int m = (int)L.size();
-        vector<int> B(m);
-        B[0] = L[0] + 1;
-        for(int i = 1; i < m; i++){
-            B[i] = L[i];
-        }
 
-        vector<int> x(m), y(m);
-        bool found = false;
-
-        if(t[0] == '<'){
-            for(int y0 = B[0]; y0 <= n; y0++){
-                int x0 = y0 - (B[0]-1);
-                if(x0 < 1) continue;
-                x[0] = x0;  y[0] = y0;
-                int gmin = x0, gmax = y0;
-                bool ok = true;
-
-                for(int i = 1; i < m; i++){
-                    if(t[i] == '<'){
-                        y[i] = gmin - 1;
-                        x[i] = y[i] - (B[i]-1);
-                        if(x[i] < 1){ ok = false; break; }
-                    } else {
-                        x[i] = gmax + 1;
-                        y[i] = x[i] + (B[i]-1);
-                        if(y[i] > n){ ok = false; break; }
-                    }
-                    gmin = min(gmin, x[i]);
-                    gmax = max(gmax, y[i]);
-                }
-
-                if(ok){
-                    found = true;
-                    break;
-                }
-            }
-        }
         else {
-            for(int x0 = 1; x0 + (B[0]-1) <= n; x0++){
-                int y0 = x0 + (B[0]-1);
-                x[0] = x0;  y[0] = y0;
-                int gmin = x0, gmax = y0;
-                bool ok = true;
-
-                for(int i = 1; i < m; i++){
-                    if(t[i] == '<'){
-                        y[i] = gmin - 1;
-                        x[i] = y[i] - (B[i]-1);
-                        if(x[i] < 1){ ok = false; break; }
-                    } else {
-                        x[i] = gmax + 1;
-                        y[i] = x[i] + (B[i]-1);
-                        if(y[i] > n){ ok = false; break; }
-                    }
-                    gmin = min(gmin, x[i]);
-                    gmax = max(gmax, y[i]);
-                }
-
-                if(ok){
-                    found = true;
-                    break;
-                }
-            }
+            v[i + 1] = ++r;
         }
-
-        vector<int> ans;
-        ans.reserve(n);
-        for(int i = 0; i < m; i++){
-            if(t[i] == '<'){
-                for(int d = 0; d < B[i]; d++){
-                    ans.push_back(y[i] - d);
-                }
-            } else {
-                for(int d = 0; d < B[i]; d++){
-                    ans.push_back(x[i] + d);
-                }
-            }
-        }
-
-        for(int v : ans) cout << v << ' ';
-        cout << "\n";
     }
+
+    for(ll i = 0; i < n; i++) {
+        cout << v[i] - l + 1 << " ";
+    }
+
+    cout << nline;
+}
+
+int main()
+{
+#ifdef thepratholic
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+    clock_t T = clock();
+#endif
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    long long t = 1;
+    cin >> t;
+
+    while (t--)
+    {
+        solve();
+    }
+
+#ifdef thepratholic
+    cout << "\nTime taken: " << ((float)(clock() - T)) / CLOCKS_PER_SEC << " seconds";
+#endif
     return 0;
 }
