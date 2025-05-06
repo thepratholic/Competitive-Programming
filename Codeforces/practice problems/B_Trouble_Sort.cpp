@@ -25,9 +25,9 @@ using namespace std;
 
 void solve()
 {
-    int n;
+    ll n;
     cin >> n;
-    vector<int> a(n), b(n);
+    vector<ll> a(n + 1), b(n + 1);
     bool sorted = 1, have0 = 0, have1 = 0;
     for(int i = 1; i <= n; i++)
     {
