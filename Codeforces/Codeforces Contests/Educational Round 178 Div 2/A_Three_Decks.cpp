@@ -32,15 +32,15 @@ void solve()
     if (total % 3 == 0) {
         ll x = total / 3;
         if (x >= b && x <= c) {
-            cout << "YES\n";
+            cout << "YES" << nline;
         } else {
-            cout << "NO\n";
+            cout << "NO" << nline;
         }
     } else {
-        cout << "NO\n";
+        cout << "NO" << nline;
     }
 }
-
+ 
 int main()
 {
 #ifdef thepratholic
