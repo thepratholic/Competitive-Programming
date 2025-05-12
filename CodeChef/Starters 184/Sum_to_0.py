@@ -51,11 +51,10 @@ def solve():
 
     ans = []
     if n % 2 == 0:
-
         for _ in range(n//2):
             ans.extend([1, -1])
+
     else:
-      
         for _ in range((n-3)//2):
             ans.extend([1, -1])
         ans.extend([1, 2, -3])
