@@ -25,28 +25,23 @@ def WSNOPRINT(out): return ''.join(map(str, out))
 
 def solve():
     n = II()
-    A = LII()
+    a = LII()
 
-    half = n // 2
-    cnt = [0] * (half + 2)  
+    cnt = [0] * n
 
-    for a in A:
-        j1 = a + 1      
-        j2 = n - a        
-        x = j1 if j1 <= j2 else j2
-        cnt[x] += 1
+    for i in range(n):
+        cnt[a[i]] += 1
 
-    for x in range(1, half + 1):
-        if cnt[x] != 2:
-            print(0)
-            return
-    if n & 1:
-        if cnt[half+1] != 1:
-            print(0)
-            return
-
+    ans = 1
     MOD = 998244353
-    print(pow(2, half, MOD))
+    for i in range(n // 2):
+        if cnt[i] + cnt[n - i - 1] != 2:
+            print(0)
+            return
+        ans = (ans * 2) % MOD
+
+    print(ans)
+
 
 def main():
     t = II()
