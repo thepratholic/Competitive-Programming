@@ -28,22 +28,35 @@ void solve()
     ll n;
     cin >> n;
 
-    vector<ll> a(n);
-    for(ll &x : a) {
+    vector<int> a(n);
+    for(int &x : a) {
         cin >> x;
     }
 
     int mn = *min_element(a.begin(), a.end());
     int mx = *max_element(a.begin(), a.end());
     if (mn == mx) {
-        cout << "No\n";
-        
+        cout << "No" << nline;
+        return;
     }
 
-    int j = find(a.begin(), a.end(), mx) - a.begin();
-    cout << "Yes\n";
-    for (int i = 0; i < n; i++) {
-        cout << (i == j ? 2 : 1) << (i+1<n ? ' ' : '\n');
+    else{
+        vector<int> ans(n, 0);
+        cout << "YES" << nline;
+        for(ll i = 0; i < n; i++) {
+            if(a[i] == mx) {
+                ans[i] = 1;
+            }
+    
+            else {
+                ans[i] = 2; 
+            }
+        }
+
+        for(auto &i : ans) {
+            cout << i << " ";
+        }
+        cout << nline;
     }
 }
 
