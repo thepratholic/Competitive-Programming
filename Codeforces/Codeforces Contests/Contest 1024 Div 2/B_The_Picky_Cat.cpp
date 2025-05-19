@@ -27,9 +27,9 @@ void solve()
 {
      ll n;
     cin >> n;
-    ia(a, n);
-    ll x = llabs(a[0]);
-    ll cnt = 0;
+    iv(a, n);
+    int x = llabs(a[0]);
+    int cnt = 0;
     for (ll i = 1; i < n; i++) {
         if (llabs(a[i]) < x) cnt++;
     }
