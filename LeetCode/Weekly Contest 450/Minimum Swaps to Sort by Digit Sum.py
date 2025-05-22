@@ -37,6 +37,5 @@ class Solution:
                 j = position[j]
                 cycles += 1
 
-            swaps += cycles - 1
-
+            swaps += (cycles - 1)
         return swaps
