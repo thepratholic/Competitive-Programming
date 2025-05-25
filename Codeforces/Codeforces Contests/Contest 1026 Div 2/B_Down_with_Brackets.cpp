@@ -35,26 +35,18 @@ void solve()
             return;
         }
         
-        int bal = 0;
-        int mini = -1;
-        
-        for (int i = 0; i < n; i++) {
-            if (s[i] == '(') {
-                bal++;
-            } else {
-                bal--;
-            }
-            if (bal == 0 && i < n - 1) {
-                mini = i;
-                break;
+        int cnt = 0;
+        for(int i = 0; i < n; i++) {
+            cnt += (s[i] == '(');
+            cnt -= (s[i] == ')');
+
+            if(cnt == 0 && i != n - 1) {
+                yes;
+                return;
             }
         }
-        
-        if (mini != -1) {
-            cout << "YES\n";
-        } else {
-            cout << "NO\n";
-        }
+
+        no;
 }
 
 int main()
