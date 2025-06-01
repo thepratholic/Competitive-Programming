@@ -49,9 +49,29 @@ def solve():
     a = LII()
     b = LII()
 
-    
+    d = defaultdict(int)
+    for i in range(n):
+        d[a[i]] = i
+
+    ans = [0] * n
+
+    pq = []
+    sum_ = 0
+
+    for i in range(1, n+1):
+        idx = d[i] 
+        ans[idx] = sum_
+        heapq.heappush(pq, b[idx])
+
+        if len(pq) > k:
+            sum_ -= heapq.heappop(pq)
+
+        sum_ += b[idx]
+
+    print(*ans)
+
 
 def main():
-    # for _ in range(II()):
+    for _ in range(II()):
         solve()
 main()
