@@ -28,9 +28,20 @@ void solve()
     ll n;
     cin >> n;
 
-    iv(p, n);
-    iv(q, n);
-    
+    iv(a, n);
+
+    if(a[0] == a[n - 1]) {
+        no;
+        return;
+    }
+
+    yes;
+    cout << a[n - 1] << " ";
+    for(ll i = 0; i < n - 1; i++) {
+        cout << a[i] << " ";
+    }
+
+    cout << nline;    
     
 }
 
