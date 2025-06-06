@@ -29,7 +29,7 @@ void solve()
     cin >> x;
 
     int k = 0;
-    long long temp = x;
+    ll temp = x;
     while (temp) {
         ++k;
         temp >>= 1;
