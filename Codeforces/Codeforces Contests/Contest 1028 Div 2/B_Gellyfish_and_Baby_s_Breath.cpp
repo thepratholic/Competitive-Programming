@@ -10,7 +10,7 @@ using namespace std;
 #define iv(v, n) \
     vector<ll> v(n); \
     f(i, n) cin >> v[i]
-// #define MOD (1000000007)
+#define MOD (998244353)
 #define INF 1000000000000000000LL // Infinity for ll
 #define mp make_pair
 #define nline '\n'
@@ -22,42 +22,44 @@ using namespace std;
 // take care about cin >> t;
 // comment the optimization before debugging
 // ALWAYS USE FIXED << SETPRECISION WHILE OUTPUTTING FLOATS
-const int MOD = 998244353;
-const int MAXN = 100005;
 
-int pow2[MAXN];
-
-void precompute_powers() {
-    pow2[0] = 1;
-    for (int i = 1; i < MAXN; ++i) {
-        pow2[i] = (pow2[i - 1] * 2) % MOD;
-    }
-}
-
+ll po[100001];
 void solve()
 {
-    precompute_powers();
     ll n;
     cin >> n;
 
     iv(p, n);
     iv(q, n);
 
-    vector<int> r(n);
+    vector<ll> posa(n), posb(n);
 
-    for (int i = 0; i < n; ++i) {
-        int max_val = 0;
-        for (int j = 0; j <= i; ++j) {
-            int a = pow2[p[j]];
-            int b = pow2[q[i - j]];
-            int sum = (a + b) % MOD;
-            max_val = max(max_val, sum);
-        }
-        r[i] = max_val;
+    f(i, n) {
+        posa[p[i]] = i;
+        posb[q[i]] = i;
     }
 
-    for (int i = 0; i < n; ++i) cout << r[i] << " ";
-    cout << "\n";
+    vector<ll> ans;
+
+    ll pa = p[0], pb = q[0];
+
+    f(i, n) {
+        pa = max(pa, p[i]);
+        pb = max(pb, q[i]);
+
+        pair<ll, ll> p1 = mp(pa, q[i - posa[pa]]);
+        pair<ll, ll> p2 = mp(pb, p[i - posb[pb]]);
+
+        pair<ll, ll> ansp = max(p1, p2);
+        ans.push_back((po[ansp.first] + po[ansp.second]) % MOD);
+    }
+
+    f(i, n) {
+        cout << ans[i] << " ";
+    }
+
+    cout << nline;
+
 }
 
 int main()
@@ -71,6 +73,11 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
+
+    po[0] = 1;
+    for(int i =1 ; i<= 100000; i++) {
+        po[i] = 2 * po[i-1] % MOD;
+    }
 
     long long t = 1;
     cin >> t;
