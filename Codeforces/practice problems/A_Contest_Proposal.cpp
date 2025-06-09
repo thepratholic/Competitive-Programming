@@ -22,17 +22,28 @@ using namespace std;
 // take care about cin >> t;
 // comment the optimization before debugging
 // ALWAYS USE FIXED << SETPRECISION WHILE OUTPUTTING FLOATS
-
+const int N = 105;
 void solve()
 {
     ll n;
     cin >> n;
 
-    iv(a, n);
-    iv(b, n);
+    vector<ll> a(N), b(N);
 
-    
-    
+    for(ll i = 1; i <= n; i++) cin >> a[i];
+
+    for(ll i = 1; i <= n; i++) cin >> b[i];
+
+    int k = 0;
+    for(int i = 1; i+k <= n;) {
+        if(a[i] > b[i + k]) {
+            k++;
+        }
+
+        else i++;
+    }
+
+    cout << k << nline;
 }
 
 int main()
