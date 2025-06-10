@@ -30,30 +30,13 @@ void solve() {
     vector<int> result(n);
 
     
-    vector<int> odds, evens;
-    for (int i = 1; i <= n; i++) {
-        if (i % 2 == 1) {
-            odds.push_back(i);
-        } else {
-            evens.push_back(i);
-        }
+    for(int i = 0; i < n; i++) {
+        result[i] = i + 1;
     }
-    
-    reverse(evens.begin(), evens.end());
-    
-    int idx = 0;
-    for (int i = 0; i < odds.size(); i++) {
-        result[idx++] = odds[i];
-    }
-    for (int i = 0; i < evens.size(); i++) {
-        result[idx++] = evens[i];
-    }
-    
-    for (int i = 0; i < n; i++) {
-        cout << result[i];
-        if (i < n-1) cout << " ";
-    }
-    cout << "\n";
+
+    swap(result[1], result[n - 1]);
+    for(auto &x : result) cout << x << " ";
+    cout << nline;
 }
 
 int main()
