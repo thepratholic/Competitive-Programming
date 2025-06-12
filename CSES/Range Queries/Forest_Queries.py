@@ -46,7 +46,7 @@ def bootstrap(f, stack=[]):
 def solve():
     # Your solution here
     n, q = map(int, input().split())
-    forest = ['']  # 1-based
+    forest = [''] 
 
     for _ in range(n):
         forest.append(' ' + input())
