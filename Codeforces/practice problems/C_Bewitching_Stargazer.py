@@ -45,31 +45,20 @@ def bootstrap(f, stack=[]):
 #@bootstrap
 def solve():
     # Your solution here
-    n = II()
+    n, k = MII()
     
-    if n == 1:
-        print(1)
-        print(1)
-        return
-    
-    elif n == 3:
-        print(3)
-        print(1, 2, 3)
-        return
-    
-    else:
-        a = []
-    for i in range(62, -1, -1):
-        x = 1 << i
-        if ((x & n) == x) and (x != n):
-            a.append(n - x)
-    a.append(n)
-    print(len(a))
-    for i in a:
-        print(i, end=" ")
-    print("")
+    mul = n + 1
+    cur = 1
+    sum_ = 0
 
-    
+    while n >= k:
+        if n & 1:
+            sum_ += cur
+
+        n >>= 1
+        cur <<= 1
+
+    print(mul * sum_ // 2)
 
 def main():
     for _ in range(II()):
