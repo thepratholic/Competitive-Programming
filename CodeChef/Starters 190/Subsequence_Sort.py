@@ -45,10 +45,30 @@ def bootstrap(f, stack=[]):
 #@bootstrap
 def solve():
     # Your solution here
-    n, k = MII()
+    n = II()
     a = LII()
 
+    # edge case for the sorted array 
+    if a == sorted(a):
+        print(0)
+        return
     
+    ans = 0
+
+    for i in range(1, n):
+        if a[i] < a[i - 1]:
+            diff = a[i] ^ a[i - 1]
+
+            bits = diff.bit_length()
+            ans = max(ans, bits)
+            a[i] = a[ i- 1]
+
+    if ans:
+        print(1 << (ans - 1))
+
+    else:
+        print(ans)
+
 
 def main():
     for _ in range(II()):
