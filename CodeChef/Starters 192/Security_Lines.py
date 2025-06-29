@@ -80,24 +80,15 @@ MATI = lambda x : [list(map(int, sys.stdin.readline().split())) for _ in range(x
 # input_file = open(r'input.txt', 'r');sys.stdin = input_file
 
 def solve():
-    N = int(input())
-    A = list(map(int, input().split()))
+    n = II()
+    a = LII()
+    ans = a[0]
 
-    res = float('inf')
+    for i in range(1, n):
+        ans = min(ans, max(i, a[i] + 1))
 
-    if min(A) == A[0]:
-        print(A[0])
-        return
-    
-    p = 0
-    for i in range(1, N):
-        # You will reach queue i in i seconds
-        # In those i seconds, i people from each queue will already be done
-        # So remaining people in queue i will be max(0, A[i] - i)
-        # You join at the end and need to wait for them
-        total_time =  max(0, A[p] - i + 1)
-        res = min(res, total_time)
+    print(ans)
 
-    print(res)
+
 for _ in range(II()):
     solve()
