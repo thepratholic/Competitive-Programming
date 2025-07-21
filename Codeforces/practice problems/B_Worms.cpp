@@ -1,45 +1,64 @@
+// Choose cpp when the time
+// limit will for sure give tle in pypy
 #include <bits/stdc++.h>
-
 using namespace std;
+#define int long long
+#define INF LLONG_MAX
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+#define print(arr) for (auto it : arr){cout<<it<<" ";}cout<<endl;
+#define len(arr) arr.size()
+#define printf(x) cout << x << endl;
+#define printm(map) cout<<"{";for(auto it: map){cout<<it.first<<":"<<it.second<<",";};cout<<"}"<<endl;
 
-#define ll long long
+// const int MOD = 998244353;
+const int MOD = 1e9 + 7;
 
-void solve()
-{
-    ll n;
-    cin >> n;
-
-    vector<ll> v(n);
-    vector<ll> pre(n);
-
-    for (ll i = 0; i < n; i++) cin >> v[i];
-
-    // Compute prefix sums
-    pre[0] = v[0];  
-    for (int i = 1; i < n; i++) {
-        pre[i] = pre[i - 1] + v[i];
-    }
-
-    ll m;
-    cin >> m;
-
-    while (m--) {
-        ll q;
-        cin >> q;
-
-        auto it = lower_bound(pre.begin(), pre.end(), q);
-
-        cout << (it - pre.begin()) + 1 << endl;
-    }
+int gcd(int a, int b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
 }
 
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+int lcm(int a, int b) {
+    return a / gcd(a, b) * b;
+}
 
-    solve();
+// String hashing: sh/shclass, Number: numtheory, SparseTable: SparseTable
+// Segment Tree(lazy propogation): SegmentTree, Merge Sort Tree: sorttree
+// binary indexed tree: BIT, Segment Tree(point updates): SegmentPoint, Convex Hull: hull, Trie/Treap: Tries
+// Combinatorics: pnc, Diophantine Equations: dpheq, Graphs: graphs, DSU: DSU, Geometry: Geometry, FFT: fft
+// Persistent Segment Tree: perseg, FreqGraphs: bgraph
+// Template : https://github.com/thepratholic/CP-Template-Py-Cpp
 
+void solve() {
+    int n; cin >> n;
+    vector<int> a(n);
+    for (int &x : a) cin >> x;
+
+    int m;
+    cin >> m;
+
+    vector<int> q(m);
+    for (int &x : q) cin >> x;
+
+
+    vector<int> worms(n);
+
+    worms[0] = a[0];
+    for(int i = 1; i < n; i++) {
+        worms[i] = worms[i - 1] + a[i];
+    }
+
+    for(auto &x : q) {
+        auto it = lower_bound(begin(worms), end(worms), x);
+        cout << (it - worms.begin()) + 1 << endl;
+    }
+
+}
+
+int32_t main() {
+    fastio
+    int t = 1; 
+    // cin >> t;
+    while (t--) solve();
     return 0;
 }
