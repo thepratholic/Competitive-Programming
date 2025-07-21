@@ -6,19 +6,16 @@ class Solution:
     def countTrapezoids(self, points: List[List[int]]) -> int:
         MOD = 10**9 + 7
 
-        y_groups = defaultdict(list)
+        y_groups = defaultdict(int)
 
         for x, y in points:
-            y_groups[y].append(x)
+            y_groups[y] += 1
 
-        segment_counts = []
-        for x_list in y_groups.values():
-            count = len(x_list)
-            if count >= 2:
-                segment_counts.append(count * (count - 1) // 2)
+        res = total = 0
 
-        total = sum(segment_counts)
-        square_sum = sum(c * c for c in segment_counts)
+        for y, count in y_groups.items():
+            lines = count * (count - 1) // 2
+            res = (res + total * lines) % MOD
+            total = (total + lines) % MOD
 
-        result = (total * total - square_sum) // 2
-        return result % MOD
+        return res
