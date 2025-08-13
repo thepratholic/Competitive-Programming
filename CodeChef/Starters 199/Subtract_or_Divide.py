@@ -87,6 +87,7 @@ def solve():
     else:
         print(n - n // 4)
     
+    print("".join(ans))
 
 
 for _ in range(II()):
