@@ -83,12 +83,10 @@ def solve():
     n = II()
     ans = []
     if n & 1:
-        ans.append(str((n + 1) // 2))
+        print((n + 1) // 2)
     else:
-        ans.append(str(n - n // 4))
+        print(n - n // 4)
     
-    print("".join(ans))
-
 
 
 for _ in range(II()):
