@@ -81,7 +81,7 @@ MATI = lambda x : [list(map(int, sys.stdin.readline().split())) for _ in range(x
 
 def solve():
     n = II()
-    ans = []
+
     if n & 1:
         print((n + 1) // 2)
     else:
