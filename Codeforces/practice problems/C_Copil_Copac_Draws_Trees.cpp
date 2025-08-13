@@ -30,10 +30,53 @@ int lcm(int a, int b) {
 // Template : https://github.com/thepratholic/CP-Template-Py-Cpp
 
 void solve() {
-    int n; cin >> n;
-    vector<int> L(n);
-    for (int &x : L) cin >> x;
-}
+    int n;
+    cin >> n;
+
+    vector<vector<pair<int,int>>> adj(n + 1);
+    vector<int> dp(n + 1, 0);
+    vector<int> id(n + 1, 0);
+
+    for (int i = 1; i <= n - 1; i++) {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(make_pair(v, i));
+        adj[v].push_back(make_pair(u, i));
+    }
+
+    dp[1] = 1;
+    id[1] = 0;
+
+    stack<int> st;
+    st.push(1);
+
+    while (!st.empty()) {
+        int u = st.top();
+        st.pop();
+
+        int sz = (int)adj[u].size();
+        for (int k = 0; k < sz; k++) {
+            int v = adj[u][k].first;
+            int e = adj[u][k].second;
+
+            if (dp[v] == 0) { 
+                if (e > id[u]) dp[v] = dp[u];
+                else dp[v] = dp[u] + 1;
+
+                id[v] = e;
+                st.push(v);
+            }
+        }
+    }
+
+    int ans = 0;
+    for (int i = 1; i <= n; i++) {
+        if (dp[i] >= ans) ans = dp[i];
+    }
+    cout << ans << endl;
+    
+
+} 
 
 int32_t main() {
     fastio
