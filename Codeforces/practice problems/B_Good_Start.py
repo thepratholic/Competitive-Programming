@@ -80,10 +80,24 @@ MATI = lambda x : [list(map(int, sys.stdin.readline().split())) for _ in range(x
 # input_file = open(r'input.txt', 'r');sys.stdin = input_file
 
 def solve():
-    n = II()
-    L = LII()
-    #L1 = LII()
-    #st = SI()
+    w, h, a, b = map(int, input().split())
+    x1, y1, x2, y2 = map(int, input().split())
+ 
+    if x1 == x2:
+        if abs(y1 - y2) % b == 0:
+            return "Yes"
+        else:
+            return "No"
+ 
+    if y1 == y2:
+        if abs(x1 - x2) % a == 0:
+            return "Yes"
+        else:
+            return "No"
+ 
+    if (x1 - x2) % a == 0 or (y1 - y2) % b == 0:
+        return "Yes"
+    return "No"
 for _ in range(II()):
-    solve()
+    print(solve())
 
