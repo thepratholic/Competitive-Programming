@@ -85,19 +85,24 @@ def solve():
  
     if x1 == x2:
         if abs(y1 - y2) % b == 0:
-            return "Yes"
+            print("Yes")
+            return
         else:
-            return "No"
+            print("No")
+            return
  
     if y1 == y2:
         if abs(x1 - x2) % a == 0:
-            return "Yes"
+            print("Yes")
+            return
         else:
-            return "No"
+            print("No")
+            return
  
     if (x1 - x2) % a == 0 or (y1 - y2) % b == 0:
-        return "Yes"
-    return "No"
-for _ in range(II()):
-    print(solve())
+        print("Yes")
+        return
+    print("No")
 
+for _ in range(II()):
+    solve()
