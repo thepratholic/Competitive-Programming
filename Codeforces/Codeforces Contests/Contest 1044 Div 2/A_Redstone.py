@@ -80,9 +80,13 @@ MATI = lambda x : [list(map(int, sys.stdin.readline().split())) for _ in range(x
 # input_file = open(r'input.txt', 'r');sys.stdin = input_file
 
 def solve():
-    pass
+    n = II()
+    a = LII()
 
+    if len(a) != len(set(a)):
+        print("YES")
+    else:
+        print("NO")
 
 for _ in range(II()):
     solve()
-              

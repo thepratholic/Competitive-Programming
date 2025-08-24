@@ -80,9 +80,20 @@ MATI = lambda x : [list(map(int, sys.stdin.readline().split())) for _ in range(x
 # input_file = open(r'input.txt', 'r');sys.stdin = input_file
 
 def solve():
-    pass
 
+    n = II()
+    g = LII()
+    
+    g.sort()
+    
+    tot = 0
+    
+    if n % 2 == 1:
+        tot = sum(g[i] for i in range(0, n, 2))
+    else:
+        tot = sum(g[i] for i in range(1, n, 2))
+        
+    print(tot)
 
 for _ in range(II()):
     solve()
-              
