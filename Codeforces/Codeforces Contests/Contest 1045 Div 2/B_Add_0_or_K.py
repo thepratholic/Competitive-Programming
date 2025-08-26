@@ -79,12 +79,34 @@ MATI = lambda x : [list(map(int, sys.stdin.readline().split())) for _ in range(x
 #Template : https://github.com/thepratholic/CP-Template-Py-Cpp
 # input_file = open(r'input.txt', 'r');sys.stdin = input_file
 
-def solve():
-    
-    # ___
-    pass
+def modpow(b, e, m):
+    r = 1
+    b %= m
+    while e:
+        if e & 1:
+            r = (r * b) % m
+        b = (b * b) % m
+        e >>= 1
+    return r
 
+def modinv(x, m):
+    return modpow(x, m - 2, m)
+
+def solve():
+    n, k = map(int, input().split())
+    arr = LII()
+    
+    primes = [2,3,5,7,11,13,17,19,23,29,31,37]
+    p = next(pr for pr in primes if k % pr != 0)
+    kinv = modinv(k, p)
+    
+    for i in range(n):
+        rem = arr[i] % p
+        need = (p - rem) % p
+        c = (need * kinv) % p
+        arr[i] += c * k
+    
+    print(*arr)
 
 for _ in range(II()):
     solve()
-              
