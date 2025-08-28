@@ -80,11 +80,39 @@ MATI = lambda x : [list(map(int, sys.stdin.readline().split())) for _ in range(x
 # input_file = open(r'input.txt', 'r');sys.stdin = input_file
 
 def solve():
-    
-    # ___
-    pass
+    n, k = map(int, sys.stdin.readline().split())
+    s = input().strip()
+
+    bad = False
+    cnt = 0
+    for ch in s:
+        if ch == '1':
+            cnt += 1
+            if cnt >= k: 
+                bad = True
+                break
+        else:
+            cnt = 0
+
+    if bad:
+        print("NO")
+        return
+
+    print("YES")
+    zeros = [i for i in range(n) if s[i] == '0']
+    ones  = [i for i in range(n) if s[i] == '1']
+
+    perm = [0]*n
+    cur = n
+    for i in zeros:
+        perm[i] = cur
+        cur -= 1
+    for i in ones:
+        perm[i] = cur
+        cur -= 1
+
+    print(*perm)
 
 
 for _ in range(II()):
     solve()
-              
