@@ -29,6 +29,8 @@ int lcm(int a, int b) {
 // Persistent Segment Tree: perseg, FreqGraphs: bgraph
 // Template : https://github.com/thepratholic/CP-Template-Py-Cpp
 
+
+
 void solve(){
     int n;
     cin >> n;
