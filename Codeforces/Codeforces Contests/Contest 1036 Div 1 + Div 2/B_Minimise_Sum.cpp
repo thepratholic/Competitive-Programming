@@ -29,46 +29,17 @@ int lcm(int a, int b) {
 // Persistent Segment Tree: perseg, FreqGraphs: bgraph
 // Template : https://github.com/thepratholic/CP-Template-Py-Cpp
 
-int f(vector<int>& a) {
-    int sum = 0, mn = LLONG_MAX;
-    for (int x : a) {
-        mn = min(mn, x);
-        sum += mn;
-    }
-    return sum;
-}
-
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (auto& x : a) cin >> x;
+    int n; cin >> n;
+    vector<int> L(n);
+    for (int &x : L) cin >> x;
 
-    int ans = f(a);
-
-    int max_val = -1, max_idx = -1;
-    for (int i = 0; i < n; ++i) {
-        if (a[i] > max_val) {
-            max_val = a[i];
-            max_idx = i;
-        }
-    }
-
-    for (int i = 0; i < max_idx; ++i) {
-        vector<int> temp = a;
-        temp[i] += temp[max_idx];
-        temp[max_idx] = 0;
-        ans = min(ans, f(temp));
-    }
-
-    cout << ans << "\n";
+    cout << L[0] + min(L[0], L[1]) << endl;
 }
 
 int32_t main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    int t;
-    cin >> t;
+    fastio
+    int t; cin >> t;
     while (t--) solve();
     return 0;
 }
