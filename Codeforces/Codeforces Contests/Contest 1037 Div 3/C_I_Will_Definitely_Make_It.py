@@ -82,16 +82,30 @@ MATI = lambda x : [list(map(int, sys.stdin.readline().split())) for _ in range(x
 def solve():
     
     n, k = map(int, input().split())
-    h = list(map(int, input().split()))
-    hh = h[k-1]
-    h.sort()
-    flag = False
-    for i in range(n):
-        if h[i] > hh:
-            tm = h[i] - hh
-            if tm > h[i-1]:
-                flag = True
-    print("No" if flag else "Yes")
+    h = LII()
+    
+    init = h[k - 1]
+    tm = init
+
+    # fl = False
+
+    st = set()
+    for i in h:
+        if i >= init:
+            st.add(i)
+
+    st = sorted(st)
+
+    prev = init
+    for i in st:
+        if i - prev > tm:
+            print("NO")
+            return
+        prev = i
+
+    print("YES")
+
+        
 
 
 
