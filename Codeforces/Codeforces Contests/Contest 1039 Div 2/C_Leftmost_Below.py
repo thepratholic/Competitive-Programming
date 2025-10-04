@@ -79,31 +79,24 @@ MATI = lambda x : [list(map(int, sys.stdin.readline().split())) for _ in range(x
 #Template : https://github.com/thepratholic/CP-Template-Py-Cpp
 # input_file = open(r'input.txt', 'r');sys.stdin = input_file
 
+
+
+
 def solve():
     n = II()
-    b = LII()
-    mn = b[0]
-    ok = True
-    if mn == 0:
-        for x in b:
-            if x != 0:
-                ok = False
-    else:
-        for i in range(1, n):
-            if not ok:
-                break
-            if mn == 0:
-                if b[i] != 0:
-                    ok = False
-            elif b[i] > 2 * mn - 1:
-                ok = False
-            mn = min(mn, b[i])
-    
-    print("YES" if ok else "NO")
+    ans, mn = True, math.inf
+    while n > 0:
+        x = int(input())
 
+        if x >= 2 * mn:
+            ans = False
+        mn = min(mn, x)
+
+    if ans:
+        print("YES")
+    else:
+        print("NO")
 
 
 for _ in range(II()):
     solve()
-
-
