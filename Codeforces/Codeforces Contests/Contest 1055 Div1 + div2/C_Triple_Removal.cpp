@@ -31,20 +31,53 @@ int lcm(int a, int b) {
 
 void solve() {
     int n, q; cin >> n >> q;
-    
-    vector<int> a(n);
-    for(int i = 0; i < n; i++) cin >> a[i];
 
+    if (n == 0) {
+        cout << -1 << endl;
+        return;
+    }
+    
+    vector<int> ones(n + 1, 0);
     vector<int> v(n + 1, -1), bad(n + 1, 0), prefix(n + 1, -1);
+    for(int i = 1; i <= n; i++) {
+        cin >> v[i];
+
+        if(v[i] == 1) {
+            ones[i] = 1;
+        }
+
+        if (v[i] == v[i - 1]) {
+            bad[i] = 1;
+        }
+
+        ones[i] += ones[i - 1];
+        prefix[i] = bad[i] + prefix[i - 1];
+
+    }
+
 
 
     while(q--) {
         int l, r;
         cin >> l >> r;
 
+        int one = ones[r] - ones[l - 1];
+        int zeros = (r - l + 1) - one;
 
 
+        if(one % 3 != 0 || zeros % 3 != 0) {
+            cout << -1 << endl;
+            continue;
+        }
 
+
+        if (prefix[l] == prefix[r]) {
+            cout << ((r - l + 1) / 3) + 1 << endl;
+        }
+
+        else {
+            cout << (r - l + 1) / 3 << endl;
+        }
 
     }
 
