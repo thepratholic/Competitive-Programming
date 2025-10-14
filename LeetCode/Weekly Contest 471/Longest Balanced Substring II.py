@@ -1,76 +1,59 @@
 class Solution:
     def longestBalanced(self, s: str) -> int:
         n = len(s)
-        maxi, cur = 1, 1
+        mpp = {(0, 0): -1}
 
-        def help(c1, c2, skip):
-            max_len = 0
-            i = 0
+        ans = 1
+        v1, v2 = 0, 0
 
-            while i < n:
-                while i < n and s[i] == skip:
-                    i += 1
-                if i >= n:
-                    break
+        for i in range(n):
 
-                p = i
-                while i < n and s[i] != skip:
-                    i += 1
-                q = i - 1
+            if s[i] == 'a':
+                v1 += 1
+                v2 += 1
+            elif s[i] == 'c':
+                v2 -= 1
+            else:
+                v1 -= 1
 
-                x = y = 0
-                mpp = {0: p - 1}
+            if (v1, v2) not in mpp:
+                mpp[(v1, v2)] = i
+            
+            ans = max(ans, i - mpp[(v1, v2)])
 
-                for j in range(p, q + 1):
-                    ch = s[j]
-                    if ch == c1:
-                        x += 1
-                    elif ch == c2:
-                        y += 1
 
-                    key = x - y
-                    if key in mpp:
-                        max_len = max(max_len, j - mpp[key])
-                    else:
-                        mpp[key] = j
+        comb = ["ab", "ac", "bc"]
+        for c in comb:
 
-            return max_len
+            x, y = c[0], c[1]
 
-        # this loop is only for one char
+            mpp = {0: -1}
+            v = 0
+            for i in range(n):
+                if s[i] == x:
+                    v += 1
+                elif s[i] == y:
+                    v -= 1
+                else:
+                    mpp.clear()
+                    v = 0
+                    mpp[0] = i
+                    continue
+
+                if v not in mpp:
+                    mpp[v] = i
+
+                ans = max(ans, i - mpp[v])
+
+
+        cnt = 1
         for i in range(1, n):
-
             if s[i] == s[i - 1]:
-                cur += 1
+                cnt += 1
+
             else:
-                cur = 1
+                cnt = 1
 
-            maxi = max(maxi, cur)
+            ans = max(ans, cnt)
 
-
-        # now for three chars
-        mpp = {}
-        mpp[(0, 0)] = -1
-
-        a, b, c = 0, 0, 0
-
-        for i, ch in enumerate(s):
-            if ch == 'a':
-                a += 1
-            elif ch == 'b':
-                b += 1
-            else: c += 1
-
-
-            diff1 = a - b
-            diff2 = a - c
-            key = (diff1, diff2)
-
-            if key in mpp:
-                maxi = max(maxi, i - mpp[key])
-            else:
-                mpp[key] = i
-
-        maxi = max(maxi, help('a', 'b', 'c'))
-        maxi = max(maxi, help('a', 'c', 'b'))
-        maxi = max(maxi, help('b', 'c', 'a'))
-        return maxi
+        return ans 
