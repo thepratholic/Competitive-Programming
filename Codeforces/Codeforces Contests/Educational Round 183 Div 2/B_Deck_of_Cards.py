@@ -25,7 +25,7 @@ def solve():
         for i in range(1, n + 1):
             if i <= top or i >= (n - bottom) or (n == both):
                 ans.append("-")
-            elif i <= max_top or i >= max_bottom:
+            elif i <= max_top or i >= (n - max_bottom):
                 ans.append("?")
             else:
                 ans.append("+")
