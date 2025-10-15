@@ -8,27 +8,29 @@ def solve():
             print('-' * k)
             continue
 
-        mn, mx = 0, 0
-        for c in s:
-            if c == '0':
-                mn += 1
-                mx += 1
-            elif c == '2':
-                mx += 1
+        top, bottom, both = 0, 0, 0
+        for ch in s:
+            if ch == '0':
+                top += 1
+            elif ch == '1':
+                bottom += 1
+            else:
+                both += 1
+
+
+        max_top = top + both
+        max_bottom = bottom + both
 
         ans = []
         for i in range(1, n + 1):
-            ct = i <= mx
-            cb = i > n - k + mn
-            mt = i <= mn
-            mb = i > n - k + mx
-
-            if mt or mb:
-                ans.append('-')
-            elif not ct and not cb:
-                ans.append('+')
+            if i <= top or i >= (n - bottom) or (n == both):
+                ans.append("-")
+            elif i <= max_top or i >= max_bottom:
+                ans.append("?")
             else:
-                ans.append('?')
-        print(''.join(ans))
+                ans.append("+")
+
+        print("".join(ans))
+        
 
 solve()
