@@ -46,7 +46,24 @@ void solve() {
 
     int ans = 0;
 
+    function<void (int, int)> dfs = [&](int node, int par) {
+        for(auto &p : adj[node]) {
+            int child = p.first, edge = p.second;
 
+            if(child == par) continue;
+
+            edges[child] = edge;
+
+            time[child] = time[node] + (edges[child] < edges[node]);
+
+            ans = max({ans, time[node], time[child]});
+            dfs(child, node);
+        }
+    };
+
+    dfs(0, -1);
+    cout << ans << "\n";
+    return;
 }
 
 int32_t main() {
