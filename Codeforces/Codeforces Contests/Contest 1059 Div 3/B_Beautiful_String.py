@@ -1,27 +1,34 @@
-def is_pal(s):
-    return s == s[::-1]
+import sys
+import math
+import bisect
+import heapq
+import itertools
+import collections
+import functools
+import operator
+from collections import defaultdict, Counter, deque
+from heapq import heappush, heappop, heapify
+from math import gcd, ceil, floor, sqrt
 
-t = int(input())
-for _ in range(t):
+input = lambda: sys.stdin.readline().strip()
+
+def solve():
     n = int(input())
     s = input().strip()
 
-    if is_pal(s):
-        print(0)
-        continue
+    zeros = s.count('0')
+    print(zeros)
 
-    x = ''.join(c for c in s if c != '0')
-    if is_pal(x):
-        idx = [str(i + 1) for i, c in enumerate(s) if c == '0']
-        print(len(idx))
-        print(' '.join(idx))
-        continue
+    for i in range(n):
+        if s[i] == '0':
+            print(i + 1, end=" ")
 
-    x = ''.join(c for c in s if c != '1')
-    if is_pal(x):
-        idx = [str(i + 1) for i, c in enumerate(s) if c == '1']
-        print(len(idx))
-        print(' '.join(idx))
-        continue
+    print()
 
-    print(-1)
+def main():
+    t = int(input())
+    for _ in range(t):
+        solve()
+
+if __name__ == '__main__':
+    main()
