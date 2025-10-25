@@ -1,4 +1,5 @@
 from functools import lru_cache
+from math import gcd
 from typing import List
 
 
