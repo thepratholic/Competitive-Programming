@@ -1,90 +1,88 @@
 import sys
-from collections import defaultdict, Counter, deque
-from heapq import heappush, heappop, heapify
-from math import gcd, ceil, floor, sqrt
-from functools import lru_cache, reduce
-from bisect import bisect, bisect_left, bisect_right
-from itertools import accumulate, permutations, groupby
 input = sys.stdin.readline
 
 def solve():
-    n, k, x = map(int, input().split())
-    a = sorted(list(map(int, input().split())))
+    n, k, X = map(int, input().split())
+    a = list(map(int, input().split()))
+    a.sort()
 
-    def ok(d):
-        iv = []
-        for v in a:
-            l, r = max(0, v - d + 1), min(x, v + d - 1)
+    def check(mid):
+        if mid == 0:
+            return True
+
+        bad = []
+        for val in a:
+            l = max(0, val - mid + 1)
+            r = min(X, val + mid - 1)
             if l <= r:
-                iv.append((l, r))
-        if not iv:
-            return x + 1 >= k
-        iv.sort()
-        m = []
-        cl, cr = iv[0]
-        for l, r in iv[1:]:
+                bad.append((l, r))
+
+        if not bad:
+            return True
+
+        bad.sort()
+        merged = []
+        cl, cr = bad[0]
+        for l, r in bad[1:]:
             if l <= cr + 1:
                 cr = max(cr, r)
             else:
-                m.append((cl, cr))
+                merged.append((cl, cr))
                 cl, cr = l, r
-        m.append((cl, cr))
-        bad = sum(r - l + 1 for l, r in m)
-        return (x + 1 - bad) >= k
+        merged.append((cl, cr))
 
-    lo, hi, ans = 0, x, 0
-    while lo <= hi:
-        mid = (lo + hi) // 2
-        if ok(mid):
-            ans = mid
-            lo = mid + 1
+        free = X + 1
+        for l, r in merged:
+            free -= (r - l + 1)
+
+        return free >= k
+
+    low, high = 0, X
+    best = 0
+
+    while low <= high:
+        mid = (low + high) // 2
+        if check(mid):
+            best = mid
+            low = mid + 1
         else:
-            hi = mid - 1
+            high = mid - 1
 
-    d = ans
-    iv = []
-    for v in a:
-        l, r = max(0, v - d + 1), min(x, v + d - 1)
+    # Step 3: actually place teleports
+    bad = []
+    for val in a:
+        l = max(0, val - best + 1)
+        r = min(X, val + best - 1)
         if l <= r:
-            iv.append((l, r))
-    if not iv:
-        print(" ".join(map(str, range(k))))
-        return
-    iv.sort()
-    m = []
-    cl, cr = iv[0]
-    for l, r in iv[1:]:
-        if l <= cr + 1:
-            cr = max(cr, r)
-        else:
-            m.append((cl, cr))
-            cl, cr = l, r
-    m.append((cl, cr))
+            bad.append((l, r))
 
-    tp = []
-    s, e = 0, m[0][0] - 1
-    for p in range(s, e + 1):
-        if len(tp) < k:
-            tp.append(str(p))
-        else:
-            break
-    for i in range(len(m) - 1):
-        if len(tp) == k:
-            break
-        s, e = m[i][1] + 1, m[i + 1][0] - 1
-        for p in range(s, e + 1):
-            if len(tp) < k:
-                tp.append(str(p))
+    bad.sort()
+    merged = []
+    if bad:
+        cl, cr = bad[0]
+        for l, r in bad[1:]:
+            if l <= cr + 1:
+                cr = max(cr, r)
             else:
-                break
-    if len(tp) < k:
-        s, e = m[-1][1] + 1, x
-        for p in range(s, e + 1):
-            if len(tp) < k:
-                tp.append(str(p))
-            else:
-                break
-    print(" ".join(tp))
+                merged.append((cl, cr))
+                cl, cr = l, r
+        merged.append((cl, cr))
+
+    ans = []
+    pos = 0
+    for l, r in merged:
+        while pos < l and len(ans) < k:
+            ans.append(pos)
+            pos += 1
+        pos = r + 1
+        if len(ans) == k:
+            break
+
+    while len(ans) < k and pos <= X:
+        ans.append(pos)
+        pos += 1
+
+    print(*ans)
 
 if __name__ == '__main__':
     t = int(input())
