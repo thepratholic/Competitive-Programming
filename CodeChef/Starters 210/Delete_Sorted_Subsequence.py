@@ -7,18 +7,6 @@ from bisect import bisect, bisect_left, bisect_right
 from itertools import accumulate, permutations, groupby
 input = sys.stdin.readline
 
-def is_balanced(s, n):
-    bal = 0
-    for i in range(n):
-        if s[i] == '0':
-            bal += 1
-        else:
-            bal -= 1
-        
-        if bal < 0:
-            return False
-            
-    return bal == 0
 
 def solve():
     n = int(input())
@@ -29,38 +17,26 @@ def solve():
         
     s = input().strip()
     
-    if is_balanced(s, n):
-        print(0)
-        return
-
-    first_bad_1 = n + 1
-    bal = 0
-    for i in range(n):
-        if s[i] == '0':
+    bal, bal2 = 0, 0
+    ans = 0
+    for ch in s:
+        if ch == '0':
             bal += 1
+            bal2 += 1
+
         else:
             bal -= 1
+            bal2 = max(bal2 - 1, 0)
+
         
         if bal < 0:
-            first_bad_1 = i
-            break
+            ans = 1
 
-    last_bad_0 = -1
-    bal_r = 0
-    for i in range(n - 1, -1, -1):
-        if s[i] == '1':
-            bal_r += 1
-        else:
-            bal_r -= 1
-        
-        if bal_r < 0:
-            last_bad_0 = i
-            break
-            
-    if first_bad_1 < last_bad_0:
-        print(2)
-    else:
-        print(1)
+    if bal2 > 0:
+        ans += 1
+
+    print(ans)
+
 
 if __name__ == '__main__':
     t = int(input())
