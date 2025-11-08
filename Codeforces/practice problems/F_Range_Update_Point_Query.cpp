@@ -58,7 +58,7 @@ void solve() {
             cout << a[x - 1] << nline;
         }
     }
-    
+     
 }
 
 signed main() {

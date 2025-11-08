@@ -15,6 +15,8 @@ class FastIO(IOBase):
         self.buffer = BytesIO()
         self.writable = "x" in file.mode or "r" not in file.mode
         self.write = self.buffer.write if self.writable else None
+
+
     def read(self):
         while True:
             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
@@ -24,6 +26,7 @@ class FastIO(IOBase):
             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
         self.newlines = 0
         return self.buffer.read()
+    
     def readline(self):
         while self.newlines == 0:
             b = os.read(self._fd, max(os.fstat(self._fd).st_size, BUFSIZE))
@@ -32,10 +35,14 @@ class FastIO(IOBase):
             self.buffer.seek(0, 2), self.buffer.write(b), self.buffer.seek(ptr)
         self.newlines -= 1
         return self.buffer.readline()
+    
+    
     def flush(self):
         if self.writable:
             os.write(self._fd, self.buffer.getvalue())
             self.buffer.truncate(0), self.buffer.seek(0)
+
+
 class IOWrapper(IOBase):
     def __init__(self, file):
         self.buffer = FastIO(file)
@@ -44,7 +51,7 @@ class IOWrapper(IOBase):
         self.write = lambda s: self.buffer.write(s.encode("ascii"))
         self.read = lambda: self.buffer.read().decode("ascii")
         self.readline = lambda: self.buffer.readline().decode("ascii")
-sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout)
+sys.stdin, sys.stdout = IOWrapper(sys.stdin), IOWrapper(sys.stdout) 
 
 # functions #
 # MOD = 998244353
@@ -78,6 +85,8 @@ MATI = lambda x : [list(map(int, sys.stdin.readline().split())) for _ in range(x
 #2-D BIT: 2DBIT
 #Template : https://github.com/thepratholic/CP-Template-Py-Cpp
 # input_file = open(r'input.txt', 'r');sys.stdin = input_file
+
+
 
 def solve():
     # n = II()

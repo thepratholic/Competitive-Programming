@@ -8,7 +8,7 @@ using namespace std;
 #define print(arr) for (auto it : arr){cout<<it<<" ";}cout<<endl;
 #define len(arr) arr.size()
 #define printf(x) cout << x << endl;
-#define printm(map) cout<<"{";for(auto it: map){cout<<it.first<<":"<<it.second<<",";};cout<<"}"<<endl;
+#define printm(map) cout<<"{";for(auto it: map){cout<<it.first<<":"<<it.second<<",";};cout<<"}"<<endl; 
 
 // const int MOD = 998244353;
 const int MOD = 1e9 + 7;
