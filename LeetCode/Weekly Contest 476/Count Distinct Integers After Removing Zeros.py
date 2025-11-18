@@ -1,31 +1,13 @@
 class Solution:
     def countDistinct(self, n: int) -> int:
-        if n < 10:
-            return n
-        
-        s = str(n)
-        sz = len(s)
+        n += 1
+        n = str(n)
 
-        ans = 0
-        p = 9
-        for i in range(1, sz):
-            ans += p
-            p *= 9
+        ans = sum(9 ** i for i in range(1, len(n)))
 
-        kdc = 0
-        for i, ch in enumerate(s):
-            
-            d = int(s[i]) 
-            if d == 0: 
-                break
-                
-            small = d - 1
-            rem = sz - 1 - i
-            
-            kdc += small * (9 ** rem)
+        for i in range(len(n)):
+            if n[i] == '0': break
 
-            if i == sz - 1:
-                kdc += 1 
-        
-        ans += kdc
+            ans += (int(n[i]) - 1) * (9 ** (len(n) - i - 1))
+
         return ans
