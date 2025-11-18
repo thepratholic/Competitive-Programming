@@ -15,9 +15,18 @@ input = sys.stdin.readline
 
 def solve():
     a = input().strip()
+    b = input().strip()
+
+    c1, c2 = a.count('1'), b.count('1')
+
+    if ((c1 != 0 and c2 != 0) or (c1 == c2)) and len(a) == len(b):
+        print("YES")
+
+    else:
+        print("NO")
 
 
 if __name__ == '__main__':
     t = 1
     for _ in range(t):
-        solve()
+        solve() 
