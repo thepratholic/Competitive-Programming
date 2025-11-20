@@ -1,3 +1,9 @@
+# Three Golden Rules :
+# 1) Solution is Simple
+# 2) Proof is Simple
+# 3) Implementation is Simple
+
+
 import sys
 from collections import defaultdict, Counter, deque
 from heapq import heappush, heappop, heapify
@@ -9,20 +15,13 @@ input = sys.stdin.readline
 
 def solve():
     a, b, n = map(int, input().split())
-    if a == b:
+
+
+    if (a // b) >= n:
         print(1)
         return
-
-    m = a // b
-    g = gcd(a, b)
-    A = a // g
-
-    if n <= m:
-        print(1)
-    elif n == m + 1 and n % A == 0:
-        print(1)
-    else:
-        print(2)
+    
+    print((1 if a > b else 0) + 1)
 
 if __name__ == '__main__':
     t = int(input())
