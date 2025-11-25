@@ -14,24 +14,23 @@ from itertools import accumulate, permutations, groupby
 input = sys.stdin.readline
 
 def solve():
-    n = int(input())
-    grid = []
+    a, b = map(int, input().split())
 
-    for i in range(2):
-        a = list(map(int, input().split()))
-        grid.append(a)
-
+    if a == b:
+        print(0)
+        return
     
+    s = abs(a - b)
+
+    for i in range(10 ** 5):
+        y = i * (i + 1) // 2
+
+        if y >= s and y % 2 == s % 2:
+            print(i)
+            break
 
 
 if __name__ == '__main__':
     t = int(input())
     for _ in range(t):
         solve()
-
-
-
-
-
-
-
