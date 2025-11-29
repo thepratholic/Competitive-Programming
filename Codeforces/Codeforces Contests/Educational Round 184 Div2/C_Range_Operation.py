@@ -10,23 +10,20 @@ input = sys.stdin.readline
 def solve():
     n = int(input().strip())
     a = list(map(int, input().split()))
+    # s = sum(a)
+
     pref = 0
-    best_min = 0 
-    max_delta = 0
-    for r in range(1, n + 1):
-        pref += a[r - 1]
+    ans = 0
+    mx_val = 0
 
-        F = r * r + r - pref
+    for i in range(1, n + 1):
+        mx_val = max(mx_val, -(i * i) + i + pref)
+        
+        pref += a[i - 1]
+        ans = max(ans, (i * i) + i - pref + mx_val)
 
-        delta = F - best_min
-        if delta > max_delta:
-            max_delta = delta
-
-        if F < best_min:
-            best_min = F
-
-            
-    print(pref + max_delta)
+    print(pref + ans)
+    
 
 if __name__ == '__main__':
     t = int(input())
