@@ -13,11 +13,31 @@ from bisect import bisect, bisect_left, bisect_right
 from itertools import accumulate, permutations, groupby
 input = sys.stdin.readline
 
+def pre():
+    v = []
+    a = 3
+
+    while True:
+        sa = a * a
+        b = sa // 2
+        c = b + 1
+
+        if c > 10**9: break
+
+        if (b * b) + sa == (c * c) and c == sa - b:
+            v.append(c)
+
+        a += 2
+
+    return v
+
 def solve():
     n = int(input())
+    ans = pre()
 
-    l = sqrt(2 * n - 1)
-    print(int((l - 1) // 2))
+    idx = bisect_right(ans, n)
+
+    print(idx)
 
 if __name__ == '__main__':
     t = int(input())
