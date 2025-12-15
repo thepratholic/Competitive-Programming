@@ -1,70 +1,56 @@
 import sys
 input = sys.stdin.readline
 
+def check(fs, ft):
+    for i in range(26):
+        if fs[i] > ft[i]:
+            return False
+    return True
+
 def solve():
     s = input().strip()
     t = input().strip()
 
     n = len(s)
-    m = len(t)
-    s_arr = [ord(c) - 97 for c in s]
 
-    freq = [0] * 26
+    fs = [0] * 26
+    ft = [0] * 26
+
+    for ch in s:
+        fs[ord(ch) - ord('a')] += 1
+
     for ch in t:
-        freq[ord(ch) - 97] += 1
+        ft[ord(ch) - ord('a')] += 1
 
-    need_total = [0] * 26
-    for c in s_arr:
-        need_total[c] += 1
-
-    for i in range(26):
-        if need_total[i] > freq[i]:
-            print("Impossible")
-            return
-
-    suff_need = [[0] * 26 for _ in range(n + 1)]
-    for i in range(n - 1, -1, -1):
-        row = suff_need[i]
-        nxt = suff_need[i + 1]
-        row[:] = nxt[:]
-        row[s_arr[i]] += 1
+    if not check(fs, ft):
+        print("Impossible")
+        return
 
     ans = []
-    rem = freq[:]
-    k = 0
+    p1 = 0  
 
-    for _ in range(m):
-        picked = -1
-        for c in range(26):
-            if rem[c] == 0:
+    for _ in range(len(t)):
+        for j in range(26):
+            if ft[j] == 0:
                 continue
-            new_k = k
-            if new_k < n and c == s_arr[new_k]:
-                new_k += 1
-            row = suff_need[new_k]
-            if row[c] > rem[c] - 1:
-                continue
-            ok = True
-            for x in range(26):
-                if x == c:
-                    continue
-                if row[x] > rem[x]:
-                    ok = False
-                    break
-            if ok:
-                picked = c
-                rem[c] -= 1
-                k = new_k
-                ans.append(chr(c + 97))
+
+            if p1 < n and s[p1] == chr(ord('a') + j):
+                p1 += 1
+                ft[j] -= 1
+                fs[j] -= 1
+                ans.append(chr(ord('a') + j))
                 break
-        if picked == -1:
-            print("Impossible")
-            return
+            else:
+                ft[j] -= 1
+                if check(fs, ft):
+                    ans.append(chr(ord('a') + j))
+                    break
+                else:
+                    ft[j] += 1
 
-    if k != n:
-        print("Impossible")
-    else:
-        print("".join(ans))
+    assert p1 == n
+
+    print("".join(ans))
 
 
 if __name__ == "__main__":
