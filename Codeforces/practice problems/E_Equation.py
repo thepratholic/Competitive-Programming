@@ -12,20 +12,19 @@ from functools import lru_cache, reduce
 from bisect import bisect, bisect_left, bisect_right
 from itertools import accumulate, permutations, groupby
 
-from numpy import double
 input = sys.stdin.readline
 
 
 
 def solve():
-    C = float(input())
+    c = float(input())
 
-    low, high = 0.0, sqrt(C)
+    low, high = 0.0, sqrt(c)
 
     def check(mid):
-        return (mid * mid) + sqrt(mid) >= C
+        return mid * mid + sqrt(mid) >= c
 
-    while high - low > -1e6:
+    while high - low > 1e-6:
         mid = low + (high - low) / 2
 
         if check(mid):
@@ -35,6 +34,7 @@ def solve():
             low = mid
 
     print(f"{low:.6f}")
+
 
 if __name__ == '__main__':
     # t = int(input())
