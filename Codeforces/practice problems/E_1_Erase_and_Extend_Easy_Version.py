@@ -86,14 +86,15 @@ def solve():
 
     ans = 'z' * k
 
-    for len in range(1, n + 1):
-        pref = s[:len]
+    for length in range(1, n + 1):
+        t = s[:length]
 
-        t = (pref * k)[:k]
-        t = t[:k]
-        ans = min(ans, t)
+        while len(t) < k:
+            t = t + t 
 
-
+        t = t[:k]  
+        if t < ans:
+            ans = t
     print(ans)
     
 
