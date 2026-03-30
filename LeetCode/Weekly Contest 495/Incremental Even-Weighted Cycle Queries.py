@@ -1,3 +1,6 @@
+from typing import List
+
+
 class DSU:
     def __init__(self, n):
         self.parent = list(range(n))
