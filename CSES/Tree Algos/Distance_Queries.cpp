@@ -159,7 +159,7 @@ void solve() {
 int32_t main() {
     fastio
     int t=1;
-    cin >> t;
+    // cin >> t;
     while (t--) solve();
     return 0;
 }
