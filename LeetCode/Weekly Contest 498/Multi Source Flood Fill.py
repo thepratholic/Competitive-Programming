@@ -1,38 +1,30 @@
 from collections import deque
 
-
 class Solution:
-    def colorGrid(self, n: int, m: int, sources: list[list[int]]) -> list[list[int]]:
+    def colorGrid(self, n, m, sources):
+        sources.sort(key=lambda v: -v[2])
+        
         grid = [[0] * m for _ in range(n)]
-        time = [[float('inf')] * m for _ in range(n)]
-
         q = deque()
-
-        for r, c, color in sources:
-            q.append((r, c))
-            grid[r][c] = color
-            time[r][c] = 0
-
-        dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-
-        def isValid(i, j):
-            return i >= 0 and i < n and j >= 0 and j < m
-
+        
+        for i, j, color in sources:
+            grid[i][j] = color
+            q.append((i, j))
+        
+        directions = [(0, -1), (0, 1), (1, 0), (-1, 0)]
+        
         while q:
-            r, c = q.popleft()
-
-            for dx, dy in dirs:
-                nrow, ncol = dx + r, c + dy
-
-                if isValid(nrow, ncol):
-
-                    if time[nrow][ncol] == float('inf'):
-                        time[nrow][ncol] = time[r][c] + 1
-                        q.append((nrow, ncol))
-
-                        grid[nrow][ncol] = grid[r][c]
-
-                    elif time[nrow][ncol] == time[r][c] + 1:
-                        grid[nrow][ncol] = max(grid[nrow][ncol], grid[r][c])
-
+            i, j = q.popleft()
+            
+            for di, dj in directions:
+                ni, nj = i + di, j + dj
+                
+                if ni < 0 or ni >= n or nj < 0 or nj >= m:
+                    continue
+                if grid[ni][nj] != 0:
+                    continue
+                
+                grid[ni][nj] = grid[i][j]
+                q.append((ni, nj))
+        
         return grid
