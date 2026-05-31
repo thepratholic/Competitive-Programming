@@ -97,7 +97,8 @@ def solve():
         if a[i] != a[i - 1]:
             ans[i] = a[i - 1]
 
-    b = []
+    b = [] 
+
 
     for i in range(MX):
         if not vis[i]:
@@ -111,6 +112,7 @@ def solve():
             l += 1
 
     print(*ans)
+
 
 # for _ in range(II()):
 solve()
