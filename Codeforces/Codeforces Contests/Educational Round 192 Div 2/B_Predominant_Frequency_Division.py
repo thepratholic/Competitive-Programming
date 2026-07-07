@@ -19,38 +19,45 @@ def solve():
     n = int(input())
     a = list(map(int, input().split()))
 
-    p = [0] * n
-    q = [0] * n
+    can1 = [0] * n
+    cnt1 = cnt23 = 0
 
     for i in range(n):
         if a[i] == 1:
-            p[i] = 1
-        else:
-            p[i] = -1
+            cnt1 += 1
 
+        else:
+            cnt23 += 1
+
+        can1[i] = (cnt1 >= cnt23)
+
+        if cnt1 < cnt23:
+            cnt1 = 0
+            cnt23 = 0
+            
+    can2 = [0] * n
+    cnt12 = 0
+    cnt3 = 0
+
+    for i in range(n - 2, -1, -1):
         if a[i] == 3:
-            q[i] = -1
+            cnt3 += 1
+
         else:
-            q[i] = 1
+            cnt12 += 1
 
-    for i in range(1, n):
-        p[i] += p[i - 1]
-        q[i] += q[i - 1]
+        can2[i] = (cnt12 >= cnt3)
 
-    suf = [-float('inf')] * n
-    suf[n - 2] = q[n - 2]
+        if cnt12 < cnt3:
+            cnt12 = 0
+            cnt3 = 0
 
-    for i in range(n - 3, 0, -1):
-        suf[i] = max(suf[i + 1], q[i])
+    will = False
+    for i in range(n - 1):
+        if can1[i] and can2[i + 1]:
+            will = True
 
-    ok = False
-
-    for i in range(n - 2):
-        if p[i] >= 0 and suf[i + 1] >= q[i]:
-            ok = True
-            break
-
-    print("YES" if ok else "NO")
+    print("YES" if will else "NO")
 
 t = int(input())
 for _ in range(t):
