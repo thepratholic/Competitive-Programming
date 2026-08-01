@@ -1,0 +1,38 @@
+import sys
+import os
+from sys import stdin, stdout
+from math import *
+from collections import *
+from itertools import *
+from functools import *
+from heapq import *
+from bisect import *
+from string import *
+from decimal import *
+from fractions import Fraction
+import re
+
+input = stdin.readline
+
+def solve():
+    # Write your solution here
+    n = int(input())
+    s = input()
+
+    xpos = []
+
+    for i, c in enumerate(s, 1):
+        if c == 'x':
+            xpos.append(i)
+
+    m = len(xpos)
+
+    for k in range(1, n + 1):
+        if k <= m:
+            print(xpos[k - 1])
+        else:
+            print(n)
+
+# t = int(input())
+# for _ in range(t):
+solve()
