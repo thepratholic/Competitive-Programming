@@ -1,3 +1,6 @@
+from math import gcd
+
+
 class Solution:
     def maxValidSplits(self, nums: list[int]) -> int:
         n = len(nums)
