@@ -1,0 +1,47 @@
+import sys
+import os
+from sys import stdin, stdout
+from math import *
+from collections import *
+from itertools import *
+from functools import *
+from heapq import *
+from bisect import *
+from string import *
+from decimal import *
+from fractions import Fraction
+import re
+
+input = stdin.readline
+
+def solve():
+    # Write your solution here
+    q = int(input())
+    s = input().strip()
+    t = input().strip()
+
+    pos = []
+    n = len(s)
+    m = len(t)
+
+    for i in range(n - m + 1):
+        if s[i : i + m] == t:
+            pos.append(i + 1)
+
+    for _ in range(q):
+        l, r = map(int, input().split())
+
+        lim = r - m + 1
+
+        idx = bisect_left(pos, l)
+
+        if idx < len(pos) and pos[idx] <= lim:
+            print("Yes")
+
+        else:
+            print("No")
+
+
+# t = int(input())
+# for _ in range(t):
+solve()
