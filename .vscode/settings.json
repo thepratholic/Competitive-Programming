@@ -3,5 +3,6 @@
         "iostream": "cpp",
         "cmath": "cpp",
         "tuple": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
