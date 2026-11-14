@@ -1,0 +1,1 @@
+{"name":"Local: A","url":"c:\\Users\\chela\\Competitive-Programming\\A.cpp","tests":[{"id":1794636410777,"input":"5 5\n\n..R..\n\nCCCCC\n\n..R.C\n\nCCRCC\n\n..R..","output":"1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\chela\\Competitive-Programming\\A.cpp","group":"local","local":true}
